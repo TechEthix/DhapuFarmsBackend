@@ -1,35 +1,31 @@
 const Product = require('../models/Product');
 
-// @desc    Get all products
-// @route   GET /api/products
-// @access  Public
+
 const getProducts = async (req, res) => {
   const products = await Product.find({});
   res.json(products);
 };
 
-// @desc    Create a product
-// @route   POST /api/products
-// @access  Private/Admin
+
 const createProduct = async (req, res) => {
-  const { title, image, description, category } = req.body;
+  const { title, image, description, category, price, benefits } = req.body;
 
   const product = new Product({
     title,
     image,
     description,
-    category
+    category,
+    price,
+    benefits
   });
 
   const createdProduct = await product.save();
   res.status(201).json(createdProduct);
 };
 
-// @desc    Update a product
-// @route   PUT /api/products/:id
-// @access  Private/Admin
+
 const updateProduct = async (req, res) => {
-  const { title, image, description, category } = req.body;
+  const { title, image, description, category, price, benefits } = req.body;
 
   const product = await Product.findById(req.params.id);
 
@@ -38,6 +34,8 @@ const updateProduct = async (req, res) => {
     product.image = image;
     product.description = description;
     product.category = category;
+    product.price = price;
+    product.benefits = benefits;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);

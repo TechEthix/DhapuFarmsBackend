@@ -7,15 +7,23 @@ const productSchema = mongoose.Schema({
   },
   image: {
     type: String,
-    required: true
+    // required: true
   },
   description: {
     type: String,
-    required: true
+    // required: true
   },
   category: {
     type: String,
     required: true
+  },
+  price: {
+    type: String,
+    required: true
+  },
+  benefits: {
+    type: [String],
+    // required: false
   }
 }, {
   timestamps: true
